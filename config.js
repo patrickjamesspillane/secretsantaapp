@@ -1,4 +1,5 @@
 window.SANTA_CONFIG = {
   url: 'https://epaqcuamnnddgcqumylh.supabase.co',
-  key: 'YOUR_SUPABASE_PUBLISHABLE_KEY',
+  key: 'sb_publishable_f3IV9KTuMs6aHPERS8TImA_cxB37G5O'
+',
 };
