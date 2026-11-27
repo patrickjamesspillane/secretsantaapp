@@ -68,7 +68,15 @@ async function run(control, work) {
   }
 }
 
-get('decline').onclick = () => { status.textContent = 'You shall be visited by three ghosts!'; };
+const scroogePopup = get('scrooge-popup');
+
+get('decline').onclick = () => {
+  scroogePopup.showModal();
+};
+
+get('close-scrooge').onclick = () => {
+  scroogePopup.close();
+};
 get('join').onclick = () => { location.hash = 'signup'; };
 const entry = get('entry');
 let pendingTicket;
