@@ -49,6 +49,32 @@ nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin
   main:has(#home:not([hidden])) nav {
   display: none;
 }
+  #scrooge-popup {
+  width: min(90vw, 360px);
+  max-height: 90dvh;
+  padding: 20px;
+  border: 2px solid #c39a52;
+  border-radius: 12px;
+  background: #fff8e9;
+  color: #20443a;
+  text-align: center;
+}
+
+#scrooge-popup::backdrop {
+  background: rgb(0 0 0 / 60%);
+}
+
+#scrooge-popup img {
+  display: block;
+  width: 100%;
+  max-height: 55dvh;
+  object-fit: contain;
+  margin: 0 auto 12px;
+}
+
+#close-scrooge {
+  margin-top: 12px;
+}
 </style>
 </head>
 <body>
@@ -108,6 +134,12 @@ nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin
     <a href="#draw">The draw</a>
     <a href="#organizer">Organizer</a>
   </nav>
+  <dialog id="scrooge-popup" aria-labelledby="scrooge-title">
+  <h2 id="scrooge-title">Bah Humbug!</h2>
+  <img src="scrooge.png" alt="Ebenezer Scrooge scowling by candlelight">
+  <p>There’s always next Christmas!</p>
+  <button type="button" id="close-scrooge">Close</button>
+</dialog>
 </main>
 <script src="config.js" defer></script>
 <script src="app.js" defer></script>
