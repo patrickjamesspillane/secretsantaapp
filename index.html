@@ -79,6 +79,16 @@ nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin
     <p id="draw-hint">Use the private link you received when you joined.</p>
     <div class="actions"><button type="button" id="reveal" hidden>Reveal my match</button></div>
     <p id="match"></p>
+    <div id="wishlist-panel" hidden>
+  <h3>My wish list</h3>
+  <button type="button" id="load-wishlist">Load my wish list</button>
+  <form id="wishlist-form" hidden>
+    <label for="my-wishes">Your gift ideas</label>
+    <textarea id="my-wishes" maxlength="1500"></textarea>
+    <button type="submit">Save my wish list</button>
+  </form>
+  <p id="wishlist-status" role="status"></p>
+</div>
   </section>
   <section id="organizer" hidden>
     <h2>Organizer</h2>
