@@ -68,7 +68,7 @@ async function run(control, work) {
   }
 }
 
-get('decline').onclick = () => { status.textContent = 'Sitting this one out.'; };
+get('decline').onclick = () => { status.textContent = 'You shall be visited by three ghosts!'; };
 get('join').onclick = () => { location.hash = 'signup'; };
 const entry = get('entry');
 let pendingTicket;
