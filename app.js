@@ -40,11 +40,11 @@ function route() {
   status.textContent = '';
 }
 
-async function rpc(action, payload) {
+async function rpc(action, payload, endpoint = 'muttonblock_santa') {
   if (key === 'YOUR_SUPABASE_PUBLISHABLE_KEY') {
     throw Error('The organizer still needs to connect the signup database.');
   }
-  const response = await fetch(url.replace(/\/$/, '') + '/rest/v1/rpc/muttonblock_santa', {
+ const response = await fetch(url.replace(/\/$/, '') + '/rest/v1/rpc/' + endpoint, {
     method: 'POST',
     headers: { apikey: key, 'Content-Type': 'application/json' },
     body: JSON.stringify({ action, payload }),
