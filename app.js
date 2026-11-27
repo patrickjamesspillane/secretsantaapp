@@ -125,3 +125,62 @@ manage.onsubmit = (event) => {
 
 window.addEventListener('hashchange', route);
 route();
+const wishlistPanel = get('wishlist-panel');
+const wishlistForm = get('wishlist-form');
+const wishlistInput = get('my-wishes');
+const wishlistStatus = get('wishlist-status');
+const loadWishlist = get('load-wishlist');
+let editingTicket = null;
+
+function currentWishlistTicket() {
+  const [page, linkTicket] = location.hash.slice(1).split('/');
+  if (page !== 'draw') return null;
+  if (tokenPattern.test(linkTicket ?? '')) return linkTicket;
+
+  const ticket = savedTicket();
+  return tokenPattern.test(ticket ?? '') ? ticket : null;
+}
+
+function resetWishlist() {
+  wishlistPanel.hidden = !currentWishlistTicket();
+  wishlistForm.hidden = true;
+  wishlistInput.value = '';
+  wishlistStatus.textContent = '';
+  editingTicket = null;
+}
+
+loadWishlist.onclick = () => {
+  const ticket = currentWishlistTicket();
+  if (!ticket) return;
+
+  run(loadWishlist, async () => {
+    const result = await rpc('get', { ticket }, 'muttonblock_wishlist');
+    if (currentWishlistTicket() !== ticket) return;
+
+    editingTicket = ticket;
+    wishlistInput.value = result.wishes ?? '';
+    wishlistForm.hidden = false;
+    wishlistStatus.textContent = '';
+    wishlistInput.focus();
+  });
+};
+
+wishlistForm.onsubmit = (event) => {
+  event.preventDefault();
+
+  const ticket = currentWishlistTicket();
+  if (!ticket || ticket !== editingTicket) return;
+
+  const wishes = wishlistInput.value;
+  wishlistStatus.textContent = '';
+
+  run(event.submitter, async () => {
+    await rpc('save', { ticket, wishes }, 'muttonblock_wishlist');
+    if (currentWishlistTicket() === ticket && editingTicket === ticket) {
+      wishlistStatus.textContent = 'Your wish list was saved.';
+    }
+  });
+};
+
+window.addEventListener('hashchange', resetWishlist);
+resetWishlist();
